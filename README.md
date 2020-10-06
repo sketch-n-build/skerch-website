@@ -1,1 +1,1 @@
-# skerch-website
+# skaetch-website
