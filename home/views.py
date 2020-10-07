@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post
+from .models import Post,ContactUs
 from django.contrib.auth.models import User
 from .forms import PostForm
 from django.contrib import messages
@@ -15,6 +15,7 @@ def about(request):
         'title': 'About'
     }
     return render(request, 'home/about.html', context)
+
 
 def home_view(request):
     context = {
@@ -50,9 +51,11 @@ def create_post(request):
         if filled_form.is_valid():
             title = filled_form.cleaned_data['title']
             content = filled_form.cleaned_data['content']
+            description = filled_form.cleaned_data['description']
             user = User.objects.get(id=request.user.id)
             author = user
-            post = Post(title=title, content=content, author=author)
+            post = Post(title=title, content=content,
+                        author=author, description=description)
             post.save()
             messages.success(request, f'your post {title} has been submitted')
 
@@ -86,7 +89,7 @@ class PostsDetailView(DetailView):
 def post_update(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
             messages.success(request, 'Post updated successfully')
@@ -109,3 +112,40 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+def isValid(values):
+    valid = True
+    for value in values:
+        if value == '':
+            valid = False
+    return valid
+
+def contact_us(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        if isValid([name, email, subject,message]):
+            contact = ContactUs(name=name,email=email,subject=subject,message=message)
+            contact.save()
+            messages.success(request, 'Your message was sent successfully')
+            context = {'title':'Skaetch And Build'}
+            return render(request, 'home/index.html',context)
+        else:
+            context = {'title':'Contact Us'}
+            messages.error(request, 'Something went wrong try again')
+            return render(request, 'home/contact.html', context)
+
+    context = {'title':'Contact Us'}
+
+    return render(request, 'home/contact.html', context)
+
+def speakers(request):
+    context = {'title':'Speakers'}
+
+    return render(request, 'home/speakers.html', context)
+
+def schedule(request):
+    context = {'title':'Schedule'}
+
+    return render(request, 'home/schedule.html', context)

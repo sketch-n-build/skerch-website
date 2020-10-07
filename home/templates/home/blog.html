@@ -27,7 +27,7 @@
                         {% for post in posts %}
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{ post.author.profile.image.url }}" alt="">
+                                <img class="card-img rounded-0" src="{{ post.image.url }}" alt="">
                                 <a href="#" class="blog_item_date">
                                     <h3>{{ post.author }}</h3>
                                     <p>{{ post.date_posted }}</p>
@@ -37,7 +37,7 @@
                                 <a class="d-inline-block" href="{% url 'post-details' post.pk %}">
                                     <h2 class="blog-head" style="color: #2d2d2d;">{{ post.title }}</h2>
                                 </a>
-                                <p>{{ post.content }}</p>
+                                <p>{{ post.description }}</p>
                                 <ul class="blog-info-link">
                                     <!-- <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
                                     <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li> -->
@@ -74,9 +74,6 @@
                                     <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
                                         <i class="ti-angle-right"></i>
                                     </a>
-                                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
-                                        <i class="ti-angle-double-down"></i>
-                                    </a>
                                 </li>
                                 {% endif %}
                                 {% endif %}
@@ -89,42 +86,17 @@
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
+                            {% for post in posts %}
                             <div class="media post_item">
-                                <img src="{% static 'home/img/post/post_1.png' %}" alt="post">
+                                <img width="80" height="80" src="{{ post.image.url }}" alt="post">
                                 <div class="media-body">
-                                    <a href="blog_details.html">
-                                        <h3 style="color: #2d2d2d;">From life was you fish...</h3>
+                                    <a href="{% url 'post-details' post.pk %}">
+                                        <h3 style="color: #2d2d2d;">{{ post.title }}</h3>
                                     </a>
-                                    <p>January 12, 2019</p>
+                                    <p>{{ post.date_posted }}</p>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'home/img/post/post_2.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="blog_details.html">
-                                        <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'home/img/post/post_3.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="blog_details.html">
-                                        <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="{% static 'home/img/post/post_4.png' %}" alt="post">
-                                <div class="media-body">
-                                    <a href="blog_details.html">
-                                        <h3 style="color: #2d2d2d;">Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            </div>                            
+                            {% endfor %}
                         </aside>
                         <aside class="single_sidebar_widget newsletter_widget">
                             <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>

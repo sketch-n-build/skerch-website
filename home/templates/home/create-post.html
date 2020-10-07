@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-    <div class="content-section">
+<div class="container m-5">
+    <div class="m-3 content-section">
         {% if message %}
             <div class="alert alert-danger">
                 {{ message }}
@@ -17,4 +18,5 @@
             <input type="submit" value="post">
         </form>
     </div>
+</div>
 {% endblock content %}

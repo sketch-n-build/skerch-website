@@ -35,3 +35,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = "Skaetch And Build Portal"
+admin.site.site_title = "Skaetch And Build Portal Administration"
+admin.site.index_title = "Welcome To Skaetch And Build Portal Administration"

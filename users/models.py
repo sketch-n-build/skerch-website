@@ -11,6 +11,7 @@ class Profile(models.Model):
     phone = models.CharField(blank=True, max_length=100)
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+    is_volunteer = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.user.username} profile pics'

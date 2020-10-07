@@ -63,9 +63,9 @@
                                         <ul id="navigation">    
                                             <li><a href="/">Home</a></li>
                                             <li><a class="" href="{% url 'about' %}">About</a></li>
-                                            <li><a href="spakers.html">Spakers</a></li>
-                                            <li><a href="schedule.html">Schedule</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="{% url 'speakers' %}">Spakers</a></li>
+                                            <li><a href="{% url 'schedule' %}">Schedule</a></li>
+                                            <li><a href="{% url 'contact' %}">Contact</a></li>
                                                 
                                             {% if user.is_authenticated %}
                                             <!-- <li><a class=" text-white"
@@ -75,6 +75,13 @@
                                                     <li><a class="" href="{% url 'blog' %}">Blog</a></li>
                                                     <li><a class="" href="{% url 'profile' %}">Profile</a></li>
                                                     <li><a class="" href="{% url 'logout' %}">Logout</a></li>
+                                                    {% if user.profile.is_volunteer %}
+                                                    <li>
+                                                        <a class="" href="{% url 'post' %}">New Post</a></li>
+                                                    <li>
+                                                        <a class="" href="{% url 'user-post' user.username %}"><small>Post by {{ user.username }}</small></a></li>
+                                                    {% else %}
+                                                    {% endif %}
                                                 </ul>
                                             </li>
                                             {% else %}
