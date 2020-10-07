@@ -1,0 +1,148 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block content %}
+<main>
+    <!--? Hero Start -->
+    <div class="slider-area2">
+        <div class="slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap hero-cap2 text-center">
+                            <h2>Blog</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        {% for post in posts %}
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="{{ post.author.profile.image.url }}" alt="">
+                                <a href="#" class="blog_item_date">
+                                    <h3>{{ post.author }}</h3>
+                                    <p>{{ post.date_posted }}</p>
+                                </a>
+                            </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="{% url 'post-details' post.pk %}">
+                                    <h2 class="blog-head" style="color: #2d2d2d;">{{ post.title }}</h2>
+                                </a>
+                                <p>{{ post.content }}</p>
+                                <ul class="blog-info-link">
+                                    <!-- <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li> -->
+                                </ul>
+                            </div>
+                        </article>
+                        {% endfor %}
+                        {% if is_paginated %}
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    {% if page_obj.has_previous %}
+                                    <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link"
+                                        aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                    {% endif %}
+                                </li>
+                                {% for num in page_obj.paginator.page_range %}
+                                {% if page_obj.number == num %}
+                                <li class="page-item">
+                                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                                </li>
+                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                <li class="page-item">
+                                    <a href="?page={{ num }}" class="page-link">{{ num }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link" aria-label="Last">
+                                        <i class="ti-angle-double-down"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                {% endif %}
+
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget popular_post_widget">
+                            <h3 class="widget_title" style="color: #2d2d2d;">Recent Post</h3>
+                            <div class="media post_item">
+                                <img src="{% static 'home/img/post/post_1.png' %}" alt="post">
+                                <div class="media-body">
+                                    <a href="blog_details.html">
+                                        <h3 style="color: #2d2d2d;">From life was you fish...</h3>
+                                    </a>
+                                    <p>January 12, 2019</p>
+                                </div>
+                            </div>
+                            <div class="media post_item">
+                                <img src="{% static 'home/img/post/post_2.png' %}" alt="post">
+                                <div class="media-body">
+                                    <a href="blog_details.html">
+                                        <h3 style="color: #2d2d2d;">The Amazing Hubble</h3>
+                                    </a>
+                                    <p>02 Hours ago</p>
+                                </div>
+                            </div>
+                            <div class="media post_item">
+                                <img src="{% static 'home/img/post/post_3.png' %}" alt="post">
+                                <div class="media-body">
+                                    <a href="blog_details.html">
+                                        <h3 style="color: #2d2d2d;">Astronomy Or Astrology</h3>
+                                    </a>
+                                    <p>03 Hours ago</p>
+                                </div>
+                            </div>
+                            <div class="media post_item">
+                                <img src="{% static 'home/img/post/post_4.png' %}" alt="post">
+                                <div class="media-body">
+                                    <a href="blog_details.html">
+                                        <h3 style="color: #2d2d2d;">Asteroids telescope</h3>
+                                    </a>
+                                    <p>01 Hours ago</p>
+                                </div>
+                            </div>
+                        </aside>
+                        <aside class="single_sidebar_widget newsletter_widget">
+                            <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                            <form action="#">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                                </div>
+                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                    type="submit">Subscribe</button>
+                            </form>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+</main>
+
+{% endblock content %}
