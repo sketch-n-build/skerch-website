@@ -800,46 +800,33 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
-                                <img src="{% static 'home/img/gallery/home-blog1.png' %}" alt="">
-                                <!-- Blog date -->
-                                <div class="blog-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
+                {% if featured_blogs %}
+                    {% for blog in featured_blogs %}
+                        {% if blog.featured %}
+                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                <div class="home-blog-single mb-30">
+                                    <div class="blog-img-cap">
+                                        <div class="blog-img">
+                                            <img src="{{ blog.imagelink }}" alt="">
+                                            <!-- Blog date -->
+                                            <div class="blog-date text-center">
+                                                <p>{{ blog.date_posted }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="blog-cap">
+                                            <p>| {{ blog.title }}</p>
+                                            <h3><a href="{% url 'post-details' blog.pk %}">{{ post.description }}</a>
+                                            </h3>
+                                            <a href="{% url 'post-details' blog.pk %}" class="more-btn">Read more »</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="blog-cap">
-                                <p>| Physics</p>
-                                <h3><a href="blog_details.html">Footprints in Time is perfect House in Kurashiki</a>
-                                </h3>
-                                <a href="blog_details.html" class="more-btn">Read more »</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="home-blog-single mb-30">
-                        <div class="blog-img-cap">
-                            <div class="blog-img">
-                                <img src="{% static 'home/img/gallery/home-blog2.png' %}" alt="">
-                                <!-- Blog date -->
-                                <div class="blog-date text-center">
-                                    <span>24</span>
-                                    <p>Now</p>
-                                </div>
-                            </div>
-                            <div class="blog-cap">
-                                <p>| Physics</p>
-                                <h3><a href="blog_details.html">Footprints in Time is perfect House in Kurashiki</a>
-                                </h3>
-                                <a href="blog_details.html" class="more-btn">Read more »</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                {% endif %}
             </div>
         </div>
     </section>

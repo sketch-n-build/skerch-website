@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Post,ContactUs
+from .models import Post,ContactUs,EventWeeks,EventDetails
 from django.contrib.auth.models import User
 from .forms import PostForm
+from users import models as UsersModel
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, DeleteView, ListView
@@ -18,8 +19,10 @@ def about(request):
 
 
 def home_view(request):
+    blog_post = Post.objects.all()
     context = {
-        'title': 'Skaetch'
+        'title': 'Skaetch',
+        'featured_blogs':blog_post,
     }
     return render(request, 'home/index.html', context)
 
@@ -52,10 +55,11 @@ def create_post(request):
             title = filled_form.cleaned_data['title']
             content = filled_form.cleaned_data['content']
             description = filled_form.cleaned_data['description']
+            image = filled_form.cleaned_data['imagelink']
             user = User.objects.get(id=request.user.id)
             author = user
             post = Post(title=title, content=content,
-                        author=author, description=description)
+                        author=author, description=description, imagelink=image)
             post.save()
             messages.success(request, f'your post {title} has been submitted')
 
@@ -85,7 +89,7 @@ class PostsDetailView(DetailView):
     model = Post
     #template_name = 'home/post-details.html'
 
-
+@login_required(login_url='login')
 def post_update(request, pk):
     post = Post.objects.get(pk=pk)
     if request.method == 'POST':
@@ -101,7 +105,6 @@ def post_update(request, pk):
     else:
         form = PostForm(instance=post)
         return render(request, 'home/post_update.html', {'form': form})
-
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
@@ -146,6 +149,33 @@ def speakers(request):
     return render(request, 'home/speakers.html', context)
 
 def schedule(request):
-    context = {'title':'Schedule'}
+    event_weeks = EventWeeks.objects.all()
+    event_details = EventDetails.objects.all()
+    context = {
+        'title':'Schedule',
+        'event_weeks':event_weeks,
+        'event_details':event_details,
+        }
 
     return render(request, 'home/schedule.html', context)
+
+@login_required(login_url='login')
+def user(request):
+    user = User.objects.get(id=request.user.id)
+    context = {
+        'title':request.user,
+        'user':user
+        }
+
+    return render(request, 'home/user.html', context)
+
+
+@login_required(login_url='login')
+def leaderboard(request):
+    user = UsersModel.Profile.objects.all().order_by('-points')
+    context = {
+        'title':'leaderboard',
+        'users':user
+        }
+
+    return render(request, 'home/leaderboard.html', context)
