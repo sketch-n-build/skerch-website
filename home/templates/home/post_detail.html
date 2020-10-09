@@ -25,7 +25,7 @@
             <div class="col-lg-8 posts-list">
                <div class="single-post">
                   <div class="feature-img">
-                     <img class="img-fluid" src="{{ object.image.url }}" alt="">
+                     <img class="img-fluid" src="{{ object.imagelink }}" alt="">
                   </div>
                   <div class="blog_details">
                      <h2 style="color: #2d2d2d;">{{ object.title }}</h2>
@@ -41,7 +41,7 @@
                      <img src="{{ object.author.profile.image.url }}" alt="">
                      <div class="media-body">
                         <a href="#">
-                           <h4>{{ object.author }}</h4>
+                           <h4>{{ object.author.profile.full_name }}</h4>
                         </a>
                         <!-- <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
                            our dominion twon Second divided from</p> -->

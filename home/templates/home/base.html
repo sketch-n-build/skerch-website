@@ -64,15 +64,21 @@
                                             <li><a href="/">Home</a></li>
                                             <li><a class="" href="{% url 'about' %}">About</a></li>
                                             <li><a href="{% url 'speakers' %}">Volunteers</a></li>
+                                            <li><a href="#">Event</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'speakers' %}">Spakers</a></li>
+                                                    <li><a href="{% url 'schedule' %}">Schedule</a></li>
+                                                </ul>
+                                            </li>
                                             <li><a href="{% url 'contact' %}">Contact</a></li>
+                                            <li><a class="" href="{% url 'blog' %}">Blog</a></li>
                                                 
                                             {% if user.is_authenticated %}
                                             <!-- <li><a class=" text-white"
                                                 href="{% url 'user-post' user.username %}"><small>{{ user.username }}</small></a></li> -->
                                             <li><a href="#">Action</a>
                                                 <ul class="submenu">
-                                                    <li><a class="" href="{% url 'blog' %}">Blog</a></li>
-                                                    <li><a class="" href="{% url 'profile' %}">Profile</a></li>
+                                                    <li><a class="" href="{% url 'user' %}">Profile</a></li>
                                                     <li><a class="" href="{% url 'logout' %}">Logout</a></li>
                                                     {% if user.profile.is_volunteer %}
                                                     <li>

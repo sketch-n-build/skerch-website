@@ -3,13 +3,13 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container m-5">
     <section>
         <div class="alert alert-danger">
             <p>You have been logged out</p>
-        </div>
-        <div class="border-top pt-3">
-            <small class="text-muted"><a href="{% url 'login' %}">login again</a></small>
+            <div class="border-top pt-3">
+                <a href="{% url 'login' %}"><span class="text-white btn btn-info">login again</span></a>
+            </div>
         </div>
     </section>
 </div>

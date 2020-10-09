@@ -1,0 +1,55 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="mt-5 container">
+    <table class="mb-5 mt-5 shadow table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Level</th>
+                <th scope="col">Points</th>
+                <th scope="col">Group</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                {% if user.points >= 50 %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><a href="#">
+                            <img width="30" height="30" src="{{user.image.url}}"
+                                class="rounded-circle">
+                        </a>{{ user.full_name }}</td>
+                        {% if user.level <= 3 %}
+                            <td class="text-danger">{{ user.level }}</td>
+                        {% elif user.level >= 3 and user.level <= 5  %}
+                            <td class="text-info">{{ user.level }}</td>
+                        {% elif user.level >= 5 and user.level <= 8  %}
+                            <td class="text-primary">{{ user.level }}</td>
+                        {% elif user.level >= 8 and user.level <= 12  %}
+                            <td class="text-success">{{ user.level }}</td>
+                        {% else %}
+                        {% endif %}
+                        {% if user.points <= 50 %}
+                            <td class="text-danger">{{ user.points }}</td>
+                        {% elif user.points >= 50 and user.points <= 100  %}
+                            <td class="text-info">{{ user.points }}</td>
+                        {% elif user.points >= 100 and user.points <= 150  %}
+                            <td class="text-primary">{{ user.points }}</td>
+                        {% elif user.points >= 150 and user.points <= 200  %}
+                            <td class="text-success">{{ user.points }}</td>
+                        {% else %}
+                        {% endif %}
+                        <td>{{ user.group }}</td>
+                    </tr>
+                {% else %}
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
