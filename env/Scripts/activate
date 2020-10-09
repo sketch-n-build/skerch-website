@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\dkdim\Documents\PERSONAL\projects\skerch-website\env"
+VIRTUAL_ENV="C:\Users\dkdim\Documents\PERSONAL\projects\OIT-portal\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

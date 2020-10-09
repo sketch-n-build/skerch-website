@@ -9,6 +9,12 @@ from django.views.generic import DetailView, DeleteView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 
+def frontend_view(request):
+    context = {
+        'title' : 'Skaetch | Home'
+    }
+    return render(request, 'home/index.html', context)
+
 
 def about(request):
     context = {
