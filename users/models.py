@@ -13,6 +13,8 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg',upload_to='profile_pics')
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     is_volunteer = models.BooleanField(default=False)
+    is_moderator = models.BooleanField(default=False)
+    is_intern = models.BooleanField(default=False)
     level = models.IntegerField(blank=True,default=1)
     group = models.CharField(blank=True, max_length=100)
     points = models.IntegerField(blank=True,default=0)
@@ -43,3 +45,26 @@ class Achievements(models.Model):
 
     class Meta:
         verbose_name_plural = "Achievements"
+
+class Application(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    school = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
+    about = models.CharField(default='', max_length=300)
+    q1 = models.CharField(max_length=200)
+    q2 = models.CharField(max_length=200)
+    q3 = models.CharField(max_length=200)
+    q4 = models.CharField(max_length=200)
+    q5 = models.CharField(max_length=200)
+    q6 = models.CharField(max_length=200)
+    q7 = models.CharField(max_length=200)
+    q8 = models.CharField(max_length=200)
+    city = models.CharField(max_length=30)
+    country = models.CharField(max_length=30)
+    postal_code = models.IntegerField(default=0000)
+
+    def __str__(self):
+        return self.user.profile.full_name
+
+    class Meta:
+        verbose_name_plural = "Applications"
