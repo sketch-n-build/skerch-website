@@ -2716,7 +2716,7 @@ hr {
 }
 
 .slider-height2 {
-	height: 450px;
+	height: 120px;
 	background-size: cover
 }
 
@@ -2739,14 +2739,14 @@ hr {
 }
 
 .slider-area2 {
-	background-image: url(../img/hero/hero2.png);
+	background-image: url(https://res.cloudinary.com/skaetch/image/upload/v1602253536/skaetch/assets/img/hero/hero2_l4urp8.png);
 	background-repeat: no-repeat;
 	background-size: cover
 }
 
 .slider-area {
 	margin-top: -1px;
-	background-image: url(../img/hero/h1_hero.png);
+	background-image: url(https://res.cloudinary.com/skaetch/image/upload/v1602189829/skaetch/assets/img/hero/files_m3ntxb.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover
