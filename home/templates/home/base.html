@@ -13,21 +13,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'home/img/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/skaetch/image/upload/v1602255514/skaetch/assets/img/logo/favicon_rwbocv.ico">
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/d4c999e247.js" crossorigin="anonymous"></script>
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/slicknav.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/gijgo.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/animate.min.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/magnific-popup.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/fontawesome-all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/themify-icons.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/slick.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/nice-select.css' %}">
-    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/bootstrap.min_fojxis.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/owl.carousel.min_l9ix5v.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162109/skaetch/assets/css/slicknav_ecv84e.css">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/gijgo_lmzhcg.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/animate.min_dddecx.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/magnific-popup_y6fzxl.css">
+	<!-- <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/fontawesome-all.min_zhb3z0.css"> -->
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162110/skaetch/assets/css/themify-icons_jl7za0.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162109/skaetch/assets/css/slick_lk3stf.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/nice-select_rkxxii.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602254121/skaetch/assets/css/style_sjzzrn.css">
 </head>
 
 <body>
@@ -37,7 +40,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="{% static 'home/img/logo/loder.png' %}" alt="">
+                    <img src="https://res.cloudinary.com/skaetch/image/upload/v1602161753/skaetch/assets/img/logo/loader_hqvgyj.png" alt="">
                 </div>
             </div>
         </div>
@@ -52,7 +55,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="/"><img src="{% static 'home/img/logo/logo.png' %}" alt=""></a>
+                                <a href="/"><img src="https://res.cloudinary.com/skaetch/image/upload/c_scale,w_141/v1602161752/skaetch/assets/img/logo/logo__tjow02.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-10">
@@ -63,6 +66,7 @@
                                         <ul id="navigation">    
                                             <li><a href="/">Home</a></li>
                                             <li><a class="" href="{% url 'about' %}">About</a></li>
+                                            <li><a href="{% url 'speakers' %}">Volunteers</a></li>
                                             <li><a href="#">Event</a>
                                                 <ul class="submenu">
                                                     <li><a href="{% url 'speakers' %}">Spakers</a></li>
@@ -88,8 +92,12 @@
                                                 </ul>
                                             </li>
                                             {% else %}
-                                            <li><a class="" href="{% url 'login' %}">Login</a></li>
-                                            <li><a class="" href="{% url 'register' %}">Register</a></li>
+                                            <li><a href="#">My space</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                                </ul>
+                                            </li>
                                             {% endif %}
                                         </ul>
                                     </nav>
@@ -201,7 +209,7 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
                         <!-- logo -->
                         <div class="footer-logo mb-20">
-                            <a href="index.html"><img src="{% static 'home/img/logo/logo2_footer.png' %}" alt=""></a>
+                            <a href="index.html"><img src="https://res.cloudinary.com/skaetch/image/upload/c_scale,w_141/v1602161752/skaetch/assets/img/logo/logo__tjow02.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
@@ -235,7 +243,7 @@
                             <div class="footer-copy-right">
                                 <p>
                                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    Copyright %copy;
+                                    Copyright &copy; 2019 -
                                     <script>document.write(new Date().getFullYear());</script> All rights reserved |
                                     This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
                                         href="https://colorlib.com" target="_blank">Colorlib</a>
