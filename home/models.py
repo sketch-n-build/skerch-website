@@ -10,7 +10,7 @@ class ContactUs(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.subject
 
     class Meta:
         verbose_name_plural = "Contact Us"
@@ -53,7 +53,7 @@ class EventDetails(models.Model):
     event_week = models.OneToOneField(EventWeeks,on_delete=models.CASCADE)
     event_heading = models.CharField(default='Skaetch And Build', max_length=100)
     activity = models.CharField(default='Skaetch And Build', max_length=1000) 
-    activity_time = models.DateField(default=timezone.now())  
+    activity_time = models.DateField(default=timezone.now)  
     detail_point1 = models.CharField(default='Skaetch And Build', max_length=1000)
     detail_point2 = models.CharField(default='Skaetch And Build', max_length=1000)
     detail_point3 = models.CharField(default='Skaetch And Build', max_length=1000)

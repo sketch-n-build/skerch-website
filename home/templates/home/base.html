@@ -75,7 +75,6 @@
                                                     <li><a href="{% url 'schedule' %}">Schedule</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="{% url 'contact' %}">Contact</a></li>
                                             <li><a class="" href="{% url 'blog' %}">Blog</a></li>
                                                 
                                             {% if user.is_authenticated %}
@@ -106,7 +105,7 @@
                                     </nav>
                                 </div>
                                 <div class="header-right-btn f-right d-none d-lg-block ml-30">
-                                    <a href="#" class="btn header-btn">PARTNER</a>
+                                    <a href="{% url 'contact' %}" class="btn header-btn">PARTNER</a>
                                 </div>
                             </div>
                         </div>
@@ -168,10 +167,12 @@
                             <div class="footer-tittle">
                                 <h4>Important Link</h4>
                                 <ul>
-                                    <li><a href="#">View Project</a></li>
-                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                    <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+                                    <li><a href="#"> View Project</a></li>
                                     <li><a href="#">Testimonial</a></li>
-                                    </ul>
+                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                    <li><a href="{% url 'contact' %}">Support</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -215,21 +216,21 @@
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
-                            <span>350+</span>
-                            <p>Interns</p>
+                            <span>{{ moderators }}</span>
+                            <p>Moderators</p>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <div class="footer-tittle-bottom">
-                            <span>25</span>
-                            <p>Mentors</p>
+                            <span>{{ volunteers }}</span>
+                            <p>Volunteers</p>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
                         <!-- Footer Bottom Tittle -->
                         <div class="footer-tittle-bottom">
-                            <span>10</span>
-                            <p>Partners</p>
+                            <span>{{ interns }}+</span>
+                            <p>Interns</p>
                         </div>
                     </div>
                 </div>
@@ -256,8 +257,7 @@
                             <div class="footer-social f-right">
                                 <a href="https://twitter.com/skaetch"><i class="fab fa-twitter"></i></a>
                                 <!-- <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a> -->
-                                <a href="https://www.linkedin.com/company/skaetch/"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#"><i class="fab fa-behance"></i></a>
+                                <a href="https://www.linkedin.com/company/skaetch/"><i class="fab fa-linkedin"></i></a>
                             </div>
                         </div>
                     </div>

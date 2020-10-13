@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Post,ContactUs,EventWeeks,EventDetails
 from django.contrib.auth.models import User
 from .forms import PostForm
-from users import models as UsersModel
+from users.models import Profile,Application
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, DeleteView, ListView
@@ -17,19 +17,58 @@ def frontend_view(request):
     return render(request, 'home/index.html', context)
 
 
-def about(request):
+def load_data(request,title):
+    try:        
+        blog_post = Post.objects.all()
+        moderators = Profile.objects.filter(is_moderator=True)
+        volunteers = Profile.objects.filter(is_volunteer=True)
+        interns = Profile.objects.filter(is_intern=True)
+    except:
+        moderators = False
+        volunteers = False
+        interns = False
+
+    try:        
+        event_weeks = EventWeeks.objects.all()
+        event_details = EventDetails.objects.all()
+    except:
+        event_weeks = False
+        event_details = False
+
+    try:        
+        user = User.objects.get(id=request.user.id)
+    except:
+        user = False
+
+    try:
+        users = Profile.objects.all().order_by('-points')
+    except:
+        users = False
+
+
+
     context = {
-        'title': 'About'
+        'title': title,
+        'featured_blogs':blog_post,
+        'moderators':len(moderators),
+        'volunteers':len(volunteers),
+        'interns':len(interns),
+        'event_weeks':event_weeks,
+        'event_details':event_details,
+        'user':user,
+        'users':users,
     }
+
+    return context
+
+def about(request):
+    context = load_data(request,'About Us')
     return render(request, 'home/about.html', context)
 
 
 def home_view(request):
-    blog_post = Post.objects.all()
-    context = {
-        'title': 'Skaetch',
-        'featured_blogs':blog_post,
-    }
+    context = load_data(request,'Home')
+    
     return render(request, 'home/index.html', context)
 
 
@@ -138,10 +177,10 @@ def contact_us(request):
             contact = ContactUs(name=name,email=email,subject=subject,message=message)
             contact.save()
             messages.success(request, 'Your message was sent successfully')
-            context = {'title':'Skaetch And Build'}
+            context = load_data(request,'Skaetch And Build')
             return render(request, 'home/index.html',context)
         else:
-            context = {'title':'Contact Us'}
+            context = load_data(request,'Contact Us')
             messages.error(request, 'Something went wrong try again')
             return render(request, 'home/contact.html', context)
 
@@ -150,38 +189,54 @@ def contact_us(request):
     return render(request, 'home/contact.html', context)
 
 def speakers(request):
-    context = {'title':'Speakers'}
+    context = load_data(request,'Volunteers')
 
     return render(request, 'home/speakers.html', context)
 
 def schedule(request):
-    event_weeks = EventWeeks.objects.all()
-    event_details = EventDetails.objects.all()
-    context = {
-        'title':'Schedule',
-        'event_weeks':event_weeks,
-        'event_details':event_details,
-        }
+    context = load_data(request,'Schedule')
 
     return render(request, 'home/schedule.html', context)
 
 @login_required(login_url='login')
 def user(request):
-    user = User.objects.get(id=request.user.id)
-    context = {
-        'title':request.user,
-        'user':user
-        }
+
+    context = load_data(request,request.user)
 
     return render(request, 'home/user.html', context)
 
 
-@login_required(login_url='login')
-def leaderboard(request):
-    user = UsersModel.Profile.objects.all().order_by('-points')
-    context = {
-        'title':'leaderboard',
-        'users':user
-        }
 
-    return render(request, 'home/leaderboard.html', context)
+def leaderboard(request):
+    if request.method == 'POST':
+        school = request.POST.get('school')
+        title = request.POST.get('title')
+        city = request.POST.get('city')
+        country = request.POST.get('country')
+        about = request.POST.get('about-me')
+        q1 = request.POST.get('Q1')
+        q2 = request.POST.get('Q2')
+        q3 = request.POST.get('Q3')
+        q4 = request.POST.get('Q4')
+        q5 = request.POST.get('Q5')
+        q6 = request.POST.get('Q6')
+        q7 = request.POST.get('Q7')
+        q8 = request.POST.get('Q8')
+        postal_code = request.POST.get('postal-code')
+        collect = [school, title, city,country,postal_code,q1,q2,q3,q4,q5,q6,q7,q8,about]
+        print(collect)
+        if isValid([school, title, city,country,postal_code,q1,q2,q3,q4,q5,q6,q7,q8,about]):
+            print('test passed')
+            application = Application(user=request.user, school=school,title=title,city=city,country=country,postal_code=postal_code
+            ,q1=q1,q2=q2,q3=q3,q4=q4,q5=q5,q6=q6,q7=q7,q8=q8,about=about)
+            application.save()
+            print('saved')
+            messages.success(request, 'Your application was sent successfully')
+            context = load_data(request,request.user)
+            return render(request, 'home/user.html',context)
+        else:
+            context = load_data(request,request.user)
+            return render(request, 'home/user.html', context)
+    else:
+        context = load_data(request,request.user)
+        return render(request, 'home/user.html', context)
