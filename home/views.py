@@ -188,10 +188,21 @@ def contact_us(request):
 
     return render(request, 'home/contact.html', context)
 
-def speakers(request):
+# def speakers(request):
+#     context = load_data(request,'Volunteers')
+
+#     return render(request, 'home/speakers.html', context)
+
+def volunteers(request):
     context = load_data(request,'Volunteers')
 
-    return render(request, 'home/speakers.html', context)
+    return render(request, 'home/volunteers.html', context)
+
+
+def events(request):
+    context = load_data(request,'Join Us')
+
+    return render(request, 'home/events.html', context)
 
 def schedule(request):
     context = load_data(request,'Schedule')
