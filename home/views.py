@@ -209,16 +209,16 @@ def schedule(request):
 
     return render(request, 'home/schedule.html', context)
 
-@login_required(login_url='login')
-def user(request):
-
-    context = load_data(request,request.user)
-
-    return render(request, 'home/user.html', context)
-
-
 
 def leaderboard(request):
+
+    context = load_data(request,'Leaderboard')
+
+    return render(request, 'home/leaderboard.html', context)
+
+
+@login_required(login_url='login')
+def user(request):
     if request.method == 'POST':
         school = request.POST.get('school')
         title = request.POST.get('title')
