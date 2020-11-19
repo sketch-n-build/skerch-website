@@ -25,7 +25,7 @@ SECRET_KEY = '+maskw#_7r$dgcph(wvv5#7$+c(#r9k2-!+%ia4&toza7p!d&='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['skaetch.herokuapp.com/','127.0.0.1']
+ALLOWED_HOSTS = ['shrouded-escarpment-68858.herokuapp.com/','127.0.0.1']
 
 
 # Application definition
