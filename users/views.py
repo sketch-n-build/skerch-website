@@ -23,7 +23,7 @@ def register(request):
             'form':form,
             'message':message
             }
-            return render(request,'users/login.html',context)
+            return render(request,'users/register.html',context)
     else:
         form = UserRegistrationForm()
         context = {
