@@ -1,1 +1,1 @@
-web: gunicorn oluka.wsgi 
+web: gunicorn skaetch.wsgi 
