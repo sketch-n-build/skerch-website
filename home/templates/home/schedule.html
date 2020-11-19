@@ -1,0 +1,198 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <!--? Hero Start -->
+    <div class="slider-area2">
+        <div class="slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Schedule</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+    <!--? accordion -->
+    <section class="accordion fix section-padding30">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-11">
+                    <div class="properties__button mb-40">
+                        <!--Nav Button  -->
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                                    href="#nav-home" role="tab" aria-controls="nav-home" 
+                                    aria-selected="true">Onboarding</a>
+                                {% for week in event_weeks %}
+                                <a class="nav-item nav-link" id={{week.event_id}} data-toggle="tab"
+                                    href={{week.href}} role="tab" aria-controls={{week.aria_controls}}
+                                    aria-selected="false"> Week - {{ week.week_number }}</a>
+                                {% endfor %}
+                            </div>
+                        </nav>
+                        <!--End Nav Button  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!-- Nav Card -->
+            <div class="tab-content" id="nav-tabContent">
+                <!-- card one -->
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <div class="accordion-wrapper">
+                                <div class="accordion" id="accordionExample">
+                                    <!-- single-one -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false"
+                                                    aria-controls="collapseTwo">
+                                                    <span>8:30 AM - 9:30 AM</span>
+                                                    <p>Snackes</p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                There arge many variations ohf passages of sorem gpsum ilable, but
+                                                the majority have suffered alteration in some form, by ected humour,
+                                                or randomised words whi.rere arge many variations ohf passages of
+                                                sorem gpsum ilable.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-two -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="true"
+                                                    aria-controls="collapseOne">
+                                                    <span>8:30 AM - 9:30 AM</span>
+                                                    <p>Opening conference</p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                There arge many variations ohf passages of sorem gpsum ilable, but
+                                                the majority have suffered alteration in some form, by ected humour,
+                                                or randomised words whi.rere arge many variations ohf passages of
+                                                sorem gpsum ilable.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% for event in event_details %}
+                <!-- Card two -->
+                <div class="tab-pane fade" id={{event.event_week.aria_controls}} role="tabpanel"  aria-labelledby={{event.event_week.event_id}}>
+                    <div class="row">
+                        <div class="col-lg-11">
+                            <div class="accordion-wrapper">
+                                <div class="accordion" id="accordionExample">
+                                    <!-- single-one -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseTwo2" aria-expanded="false"
+                                                    aria-controls="collapseTwo2">
+                                                    <span>{{event.activity_time}}</span>
+                                                    <p>{{event.event_heading}}</p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo2" class="collapse show" aria-labelledby="headingTwo"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                {{event.activity}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-two -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link" data-toggle="collapse"
+                                                    data-target="#collapseOne1" aria-expanded="true"
+                                                    aria-controls="collapseOne1">
+                                                    <span>Key Activity - 1</span>
+                                                    <p></p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseOne1" class="collapse" aria-labelledby="headingOne"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                {{event.detail_point1}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-three -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseThree3" aria-expanded="false"
+                                                    aria-controls="collapseThree3">
+                                                    <span>Key Activity - 2</span>
+                                                    <p></p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseThree3" class="collapse" aria-labelledby="headingThree"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                {{event.detail_point2}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- single-Four -->
+                                    <div class="card">
+                                        <div class="card-header" id="headingFour">
+                                            <h2 class="mb-0">
+                                                <a href="#" class="btn-link collapsed" data-toggle="collapse"
+                                                    data-target="#collapseFour4" aria-expanded="false"
+                                                    aria-controls="collapseFour4">
+                                                    <span>Key Activity - 3</span>
+                                                    <p></p>
+                                                </a>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseFour4" class="collapse" aria-labelledby="headingFour"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                {{event.detail_point3}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- End Nav Card -->
+        </div>
+    </section>
+    <!-- accordion End -->
+</main>
+{% endblock content %}

@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+   <!--? Hero Start -->
+   <div class="slider-area2">
+      <div class="slider-height2 d-flex align-items-center">
+         <div class="container">
+            <div class="row">
+               <div class="col-xl-12">
+                  <div class="hero-cap hero-cap2 text-center">
+                     <h2>Blog Details</h2>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Hero End -->
+   <!--================Blog Area =================-->
+   <section class="blog_area single-post-area section-padding">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-8 posts-list">
+               <div class="single-post">
+                  <div class="feature-img">
+                     <img class="img-fluid" src="{{ object.imagelink }}" alt="">
+                  </div>
+                  <div class="blog_details">
+                     <h2 style="color: #2d2d2d;">{{ object.title }}</h2>
+                     <ul class="blog-info-link mt-3 mb-4">
+                        <!-- <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
+                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li> -->
+                     </ul>
+                     <p class="excert">{{ object.content }}</p>
+                  </div>
+               </div>
+               <div class="blog-author">
+                  <div class="media align-items-center">
+                     <img src="{{ object.author.profile.image.url }}" alt="">
+                     <div class="media-body">
+                        <a href="#">
+                           <h4>{{ object.author.profile.full_name }}</h4>
+                        </a>
+                        <!-- <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he
+                           our dominion twon Second divided from</p> -->
+                     </div>
+                     {% if object.author == user %}
+                     <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1"
+                           href="{% url 'post-update' object.pk %}">Update</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.pk %}">Delete</a>
+                     </div>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4">
+               <div class="blog_right_sidebar">
+                  <aside class="single_sidebar_widget newsletter_widget">
+                     <h4 class="widget_title" style="color: #2d2d2d;">Newsletter</h4>
+                     <form action="#">
+                        <div class="form-group">
+                           <input type="email" class="form-control" onfocus="this.placeholder = ''"
+                              onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
+                        </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                           type="submit">Subscribe</button>
+                     </form>
+                  </aside>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!--================ Blog Area end =================-->
+</main>
+{% endblock content %}

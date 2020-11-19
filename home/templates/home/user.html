@@ -1,0 +1,425 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+    <title>Skaetch And Build - {{ title }}</title>
+    {% else %}
+    <title>Skaetch And Build</title>
+    {% endif %}
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'home/img/favicon.ico' %}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/profile.css' %}">    
+    <link rel="stylesheet" href="{% static 'home/css/fontawesome-all.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}"> -->
+</head>
+
+<body>
+    <div class="main-content">
+        <!-- Top navbar -->
+        <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+            <div class="container-fluid">
+                <!-- Brand -->
+                <a class="h4 mb-0 text-white text-uppercase d-lg-inline-block"
+                    href="/" target="_blank"><img src="https://res.cloudinary.com/skaetch/image/upload/v1602161753/skaetch/assets/img/logo/loader_hqvgyj.png" alt=""></a>
+                
+                <!-- User -->
+                <ul class="navbar-nav align-items-center  d-md-flex">
+                    <li class="nav-item dropdown">
+                        <span>
+                            <div class="media align-items-center">
+                                <div class="media-body mr-2  d-lg-block">
+                                    <a class="nav-link pr-0" href="/"><span class="btn btn-sm btn-primary">Home</span></a>
+                                </div>
+                                <div class="media-body mr-2  d-lg-block">
+                                    <a class="nav-link pr-0" href="{% url 'leaderboard' %}"><span class="btn btn-sm btn-primary">Leaderboard</span></a>
+                                </div>
+                                <div class="media-body d-lg-block">
+                                    <a class="nav-link pr-0" href="{% url 'logout' %}"><span class="btn btn-sm btn-primary">Logout</span></a>
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!-- Header -->
+        <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+            style="min-height: 600px; background-image: url(https://res.cloudinary.com/skaetch/image/upload/v1602251673/skaetch/assets/img/gallery/Youtube_ledyai.jpg); background-size: cover; background-position: center top;">
+            <!-- Mask -->
+            <span class="mask bg-gradient-default opacity-8"></span>
+            <!-- Header container -->
+            <div class="container-fluid d-flex align-items-center">
+                <div class="row">
+                    <div class="col-lg-7 col-md-10">
+                        <h1 class="display-2 text-white">{{user.profile.full_name}}</h1>
+                        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made
+                            with your work and manage your projects or assigned tasks</p>
+                        <a href="{% url 'profile' %}" class="btn btn-info">Update Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page content -->
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                    <div class="card card-profile shadow">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-3 order-lg-2">
+                                <div class="card-profile-image">
+                                    <a href="#">
+                                        <img src="{{user.profile.image.url}}"
+                                            class="rounded-circle">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                            <div class="d-flex justify-content-between">
+                                <a href="{% url 'blog' %}" class="btn btn-sm btn-info mr-4">Info</a>
+                                <a href="{% url 'contact' %}" class="btn btn-sm btn-default float-right">Reach Out</a>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pt-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                        <div>
+                                            <span class="heading">LEVEL</span>
+                                            <span class="description">{{user.profile.level}}</span>
+                                        </div>
+                                        <div>
+                                            <span class="heading">Group</span>
+                                            {% if user.profile.group %}
+                                            <span class="description">{{user.profile.group}}</span>
+                                            {% else %}
+                                            <span class="heading"></span>
+                                            {% endif %}
+                                        </div>
+                                        <div>
+                                            <span class="heading">Achievements</span>
+                                            {% for item in user.achievements_set.all %}
+                                            <span class="description"><i class="fa fa-trophy" style="color: {{item.color_code}};"></i> {{item.achievement_name}}</span><br>
+                                            <span class=""><small>{{item.date}}</small></span>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <h3>
+                                    {{user.profile.full_name}}<span class="font-weight-light">, {{user.profile.age}}</span>
+                                </h3>
+                                <div class="h5 font-weight-300">
+                                    <i class="ni location_pin mr-2"></i>{{user.profile.address}}
+                                </div>
+                                <div class="h5 mt-4">
+                                    <i class="ni business_briefcase-24 mr-2"></i>{{ user.application.title }}
+                                </div>
+                                <div>
+                                    <i class="ni education_hat mr-2"></i>{{ user.application.school }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-8 order-xl-1">
+                    <div class="card bg-secondary shadow">
+                        <div class="card-header bg-white border-0">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">My account</h3>
+                                </div>
+                                {% if user.application %}
+                                    <div class="col-2 text-right">
+                                        <span style="color:white ; background-color: red;" class="btn btn-sm">APPLIED</span>
+                                    </div>
+                                    <div class="ml-2 col-2 text-right">
+                                        <span class="btn btn-sm btn-primary">Settings</span>
+                                    </div>
+                                {% else %}
+                                    <div class="col-4 text-right">
+                                        <span class="btn btn-sm btn-primary">Settings</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div style="background-color: #f7fafc;" class="card-body">
+                            <form >
+                                <h6 class="heading-small text-muted mb-4">User information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Username</label>
+                                                <input disabled type="text" id="input-username"
+                                                    class="form-control" placeholder='{{user.username}}'
+                                                    value='{{user.username}}'>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Email
+                                                    address</label>
+                                                <input disabled type="email" id="input-email"
+                                                    class="form-control"
+                                                    placeholder='{{user.email}}'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-address">Address</label>
+                                                <input type="text" disabled id="input-address" class="form-control" 
+                                                    value='{{user.profile.address}}'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if user.application %}
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-city">City</label>
+                                                <input disabled type="text" id="input-city"
+                                                    class="form-control" placeholder="{{ user.application.city }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-country">Country</label>
+                                                <input disabled type="text" id="input-country"
+                                                    class="form-control" placeholder="{{ user.application.country }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-country">Postal
+                                                    code</label>
+                                                <input disabled type="number" id="input-postal-code"
+                                                    class="form-control"
+                                                    placeholder="{{ user.application.postal_code }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Description -->
+                                <h6 class="heading-small text-muted mb-4">About me</h6>
+                                <div class="pl-lg-4">
+                                    <div class="form-group focused">
+                                        <label>About Me</label>
+                                        <textarea disabled rows="4" class="form-control"
+                                            placeholder="{{ user.application.about }}"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                        <!-- ========================================= -->
+                        <!-- Hackathon Application Form -->
+                        <!-- ========================================= -->
+                        {% if not user.application %}
+                        <div class="card-body">
+                            <form action="{% url 'leaderboard' %}" method="POST">
+                                {% csrf_token %}
+                                <h1 class="heading text-muted mb-4">Application Form</h1>
+                                <h3 class="heading-small text-muted mb-4">Skill assessment:</h3>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Institution Name</label>
+                                                <input type="text" id="input-username" name="school"
+                                                    class="form-control" placeholder='Imo State University'>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Job Title</label>
+                                                <input type="text" id="input-email" name="title" class="form-control"
+                                                    placeholder='Eg: Data Scientist'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">How would you describe your strength on HTML, CSS and JS?</label>
+                                                <select id="input-username" name="Q1"
+                                                    class="form-control"> 
+                                                    <option></option>
+                                                    <option>I can create static page using Twitter Bootstrap</option>
+                                                    <option>I am just starting off my journey through Freecodecamp.org</option>
+                                                    <option>I am comfortable writing my html, css file from ground up</option>
+                                                    <option>I really do not want to do any major stuff in the Frontend Space</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Please select from the boxes below what best describes your personality in the Tech Space</label>
+                                                <select id="input-email" name="Q2"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>I am a core beginner in programming</option>
+                                                    <option>I can read other peoples code comfortably</option>
+                                                    <option>I can spot minor bugs in any given code</option>
+                                                    <option>I understand the concept of OOP</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">What best describes your goal in the next 3 years</label>
+                                                <select id="input-first-name" name="Q3"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>I would like to become a full-time software developer</option>
+                                                    <option>I am not sure of what I really want to do yet</option>
+                                                    <option>Not decided yet but have interests in ML, DS</option>
+                                                    <option>I want to go back to College</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">What best describes your choice of track?</label>
+                                                <select id="input-last-name" name="Q4"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>I am sure I will be a better Frontend Developer</option>
+                                                    <option>I am comfortable with critical and logical thinking</option>
+                                                    <option>I am totally new in Programming, not sure I know anything yet to decide</option>                                        
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">What is your best method of learning?</label>
+                                                <select id="input-first-name" name="Q5"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>Bootcamp</option>
+                                                    <option>Hackathon</option>
+                                                    <option>Regular College</option>
+                                                    <option>One-on-one guide</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">What is your understanding of a Boot camp and which one works best for you?e</label>
+                                                <select id="input-last-name" name="Q6"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>Outside home Experience</option>
+                                                    <option>Remote</option>
+                                                    <option>Combination of remote and on-site experiences sometimes</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Have you participated in a bootcamp before?</label>
+                                                <select id="input-first-name" name="Q7"
+                                                    class="form-control">
+                                                    <option></option>
+                                                    <option>Yes</option>
+                                                    <option>No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">What do you expect to get out of this experience?</label>
+                                                
+                                                    <textarea rows="4" name="Q8" class="form-control"
+                                                        ></textarea>
+                                                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-city">City</label>
+                                                <input type="text" id="input-city" name="city"
+                                                    class="form-control" placeholder="City">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-country">Country</label>
+                                                <input type="text" id="input-country" name="country"
+                                                    class="form-control" placeholder="Country">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-country">Postal
+                                                    code</label>
+                                                <input type="number" id="input-postal-code" name="postal-code"
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Description -->
+                                <h6 class="heading-small text-muted mb-4">About me</h6>
+                                <div class="pl-lg-4">
+                                    <div class="form-group focused">
+                                        <label>About Me</label>
+                                        <textarea rows="4" class="form-control" name="about-me"
+                                            placeholder="A few words about you ..."></textarea>
+                                    </div>
+                                </div>
+                                <div class="container">
+                                    <div class="col">
+                                        <input type="submit" class="btn btn-info" value="Apply">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+            <div class="col-xl-6 m-auto text-center">
+                <div class="copyright">
+                    <p>Dashboard By<a href="/" target="_blank">
+                        TEAM SKAETCH</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

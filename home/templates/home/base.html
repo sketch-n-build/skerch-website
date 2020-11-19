@@ -1,0 +1,314 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    {% if title %}
+    <title>Skaetch And Build - {{ title }}</title>
+    {% else %}
+    <title>Skaetch And Build</title>
+    {% endif %}
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="https://res.cloudinary.com/skaetch/image/upload/v1602255514/skaetch/assets/img/logo/favicon_rwbocv.ico">
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/d4c999e247.js" crossorigin="anonymous"></script>
+
+    <!-- CSS here -->
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/bootstrap.min_fojxis.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/owl.carousel.min_l9ix5v.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162109/skaetch/assets/css/slicknav_ecv84e.css">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/gijgo_lmzhcg.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/animate.min_dddecx.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/magnific-popup_y6fzxl.css">
+	<!-- <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/fontawesome-all.min_zhb3z0.css"> -->
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162110/skaetch/assets/css/themify-icons_jl7za0.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162109/skaetch/assets/css/slick_lk3stf.css">
+	<link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602162108/skaetch/assets/css/nice-select_rkxxii.css">
+    <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602600912/skaetch/assets/css/style_qd94d6.css">
+    <link rel="stylesheet" href="https://res.cloudinary.com/skaetch/raw/upload/v1602602482/skaetch/assets/css/styles_xyib3q.css">
+</head>
+
+<body>
+    <!-- ? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="https://res.cloudinary.com/skaetch/image/upload/v1602161753/skaetch/assets/img/logo/loader_hqvgyj.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!--? Header Start -->
+        <div class="header-area">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="/"><img src="https://res.cloudinary.com/skaetch/image/upload/c_scale,w_141/v1602161752/skaetch/assets/img/logo/logo__tjow02.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="menu-main d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">    
+                                            <li><a href="/">Home</a></li>
+                                            <li><a class="" href="{% url 'about' %}">About</a></li>
+                                            <li><a href="{% url 'volunteers' %}">Volunteers</a></li>
+                                            <li><a href="#">Event</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'events' %}">Sketch n build</a></li>
+                                                    <li><a href="{% url 'schedule' %}">Schedule</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a class="" href="{% url 'blog' %}">Blog</a></li>
+                                                
+                                            {% if user.is_authenticated %}
+                                            <!-- <li><a class=" text-white"
+                                                href="{% url 'user-post' user.username %}"><small>{{ user.username }}</small></a></li> -->
+                                            <li><a href="#">Action</a>
+                                                <ul class="submenu">
+                                                    <li><a class="" href="{% url 'user' %}">Profile</a></li>
+                                                    <li><a class="" href="{% url 'logout' %}">Logout</a></li>
+                                                    {% if user.profile.is_volunteer %}
+                                                    <li>
+                                                        <a class="" href="{% url 'post' %}">New Post</a></li>
+                                                    <li>
+                                                        <a class="" href="{% url 'user-post' user.username %}"><small>Post by {{ user.username }}</small></a></li>
+                                                    {% else %}
+                                                    {% endif %}
+                                                </ul>
+                                            </li>
+                                            {% else %}
+                                            <!-- <li><a href="#">My space</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'login' %}">Login</a></li>
+                                                    <li><a href="{% url 'register' %}">Register</a></li>
+                                                </ul>
+                                            </li> -->
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                    <a href="{% url 'contact' %}" class="btn header-btn">PARTNER</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <div class="footer-tittle">
+                                    <h4>About Us</h4>
+                                    <div class="footer-pera">
+                                        <p>Helping one person might not change the whole world, but it could 
+                                            change the world for one person - Anonymous.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Contact Info</h4>
+                                <ul>
+                                    <!-- <li>
+                                        <p>Address: Your address goes here, your demo address.</p>
+                                    </li> -->
+                                    <li><a href="#">Phone : +234 805 710 5094</a></li>
+                                    <li><a href="#">Email : info@skaetch.com</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Important Link</h4>
+                                <ul>
+                                    <li><a href="{% url 'leaderboard' %}">Leaderboard</a></li>
+                                    <li><a href="#"> View Project</a></li>
+                                    <li><a href="#">Testimonial</a></li>
+                                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                                    <li><a href="{% url 'contact' %}">Support</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Newsletter</h4>
+                                <div class="footer-pera footer-pera2">
+                                    <p>Never miss the opportunity to be among the first to know about our offerings</p>
+                                </div>
+                                <!-- Form -->
+                                <div class="footer-form">
+                                    <div id="mc_embed_signup">
+                                        <form target="_blank"
+                                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a%amp;id=92a4423d01"
+                                            method="get" class="subscribe_form relative mail_part">
+                                            <input type="email" name="email" id="newsletter-form-email"
+                                                placeholder="Email Address" class="placeholder hide-on-focus"
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = ' Email Address '">
+                                            <div class="form-icon">
+                                                <button type="submit" name="submit" id="newsletter-submit"
+                                                    class="email_icon newsletter-submit button-contactForm"><img
+                                                        src="https://res.cloudinary.com/skaetch/image/upload/v1602164541/skaetch/assets/img/gallery/form_chhgoc.png" alt=""></button>
+                                            </div>
+                                            <div class="mt-10 info"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="row footer-wejed justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <!-- logo -->
+                        <div class="footer-logo mb-20">
+                            <a href="index.html"><img src="https://res.cloudinary.com/skaetch/image/upload/c_scale,w_141/v1602161752/skaetch/assets/img/logo/logo__tjow02.png" alt=""></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="footer-tittle-bottom">
+                            <span>{{ moderators }}</span>
+                            <p>Moderators</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="footer-tittle-bottom">
+                            <span>{{ volunteers }}</span>
+                            <p>Volunteers</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <!-- Footer Bottom Tittle -->
+                        <div class="footer-tittle-bottom">
+                            <span>{{ interns }}+</span>
+                            <p>Interns</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom area -->
+        <div class="footer-bottom-area footer-bg">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-xl-10 col-lg-8 ">
+                            <div class="footer-copy-right">
+                                <p>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy; 2019 -
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                    This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-4">
+                            <div class="footer-social f-right">
+                                <a href="https://twitter.com/skaetch"><i class="fab fa-twitter"></i></a>
+                                <!-- <a href="https://www.facebook.com/sai4ull"><i class="fab fa-facebook-f"></i></a> -->
+                                <a href="https://www.linkedin.com/company/skaetch/"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!-- Scroll Up -->
+    <div id="back-top">
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+
+    <script src="{% static 'home/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'home/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'home/js/popper.min.js' %}"></script>
+    <script src="{% static 'home/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'home/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'home/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'home/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'home/js/wow.min.js' %}"></script>
+    <script src="{% static 'home/js/animated.headline.js' %}"></script>
+    <script src="{% static 'home/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Date Picker -->
+    <script src="{% static 'home/js/gijgo.min.js' %}"></script>
+    <!-- Nice-select, sticky -->
+    <script src="{% static 'home/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.sticky.js' %}"></script>
+
+    <!-- counter , waypoint -->
+    <script src="{% static 'home/js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'home/js/waypoints.min.js' %}"></script>
+    <script src="{% static 'home/js/jquery.countdown.min.js' %}"></script>
+    <!-- contact js -->
+    <script src="{% static 'home/js/contact.js' %}"></script>
+    <script src="{% static 'home/js/jquery.form.js' %}"></script>
+    <script src="{% static 'home/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'home/js/mail-script.js' %}"></script>
+    <script src="{% static 'home/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'home/js/plugins.js' %}"></script>
+    <script src="{% static 'home/js/main.js' %}"></script>
+
+</body>
+
+</html>

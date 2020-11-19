@@ -1,0 +1,19 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="container">
+        <div class="content-section m-5">
+
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Post</legend>
+                <h2>Are you sure you want to delete this post " <b>{{ object.title }}</b> "</h2>
+            </fieldset>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" class="btn btn-danger" value="Delete Post">
+                <a href="{% url 'post-details' object.pk %}" class="btn btn-info" value="delete post">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
